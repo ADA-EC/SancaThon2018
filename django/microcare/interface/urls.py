@@ -4,9 +4,9 @@ from . import views
 app_name = 'interface'
 
 urlpatterns = [
-    path('', views.index, name='index'), 
-    path('visualization', views.view, name='view'), 
-    path('search', views.search, name='search'), 
-    path('manage', views.manage, name='manage'), 
-    path('exit', views.exit, name='exit'), 
+    path('', views.index, name='index'),
+    path('locate', views.locate, name='locate'),
+    path('look', views.look, name='look'),
+    path('manage', views.manage, name='manage'),
+    path('exit', views.exit, name='exit'),
 ]

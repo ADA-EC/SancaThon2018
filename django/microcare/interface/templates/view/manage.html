@@ -28,11 +28,41 @@
         <div class="card">
             <div class="card-content">
                 <div style="height:48px">
-                    <span style="display:inline-block;" class="card-title">Visão Geral</span>                    
+                    <span style="display:inline-block;" class="card-title">Consulta de equipamentos</span>                    
                 </div>
 				<div class="row">
-                
-                </div>
+					<form action="/interface/search" method="get">
+						<div class=" input-field col s8">
+							<label  for="name">Equipamento</label>
+							<input  placeholder="Nome" id="name" type="text" name="name" value="{{ search_results }}">
+						</div>
+						<div class="input-field col s4">
+							<button class="red btn waves-effect waves-light" type="submit" value="submit">Buscar
+							<i class="material-icons right">search</i>
+							</button>
+						</div>
+						</form> 
+				</div>
+				<div class="row">
+				<table>
+        <thead>
+          <tr>
+              <th>Nome</th>
+              <th>Localização</th>
+              <th>Última vez visto</th>
+          </tr>
+        </thead>
+        <tbody>
+			{% for item in equipament_query_results %}
+			<tr> 
+				<td>{{ item.name }}</td>
+				<td><b>{{ item.device.last_position }}</b></td>
+				<td>{{ item.device.last_seen }}</td>
+			</tr>
+			{% endfor %}
+        </tbody>
+      </table>
+	  </div>
 			</div>
         </div>
     </div>

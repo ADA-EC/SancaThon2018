@@ -5,16 +5,16 @@
 {% block title %}&mu;Care{% endblock %}
 
 {% block navLinks %}
-    <li><a href="{% url 'interface:index' %}">Início</a></li>
-    <li><a href="{% url 'interface:view' %}">Visualização Geral</a></li>
-    <li><a href="{% url 'interface:search' %}">Consultar Equipamento</a></li>
+    <li><a href="{% url 'interface:index' %}">Visão Geral</a></li>
+    <li><a href="{% url 'interface:locate' %}">Localizar Equipamento</a></li>
+    <li><a href="{% url 'interface:look' %}">Consultar Equipamentos</a></li>
     <li><a href="{% url 'interface:manage' %}">Gerenciar</a></li>
     <li><a href="{% url 'interface:exit' %}">Sair</a></li>
 {% endblock %}
 {% block navLinksMobile %}
-    <li><a href="{% url 'interface:index' %}">Início</a></li>
-    <li><a href="{% url 'interface:view' %}">Visualização Geral</a></li>
-    <li><a href="{% url 'interface:search' %}">Consultar Equipamento</a></li>
+    <li><a href="{% url 'interface:index' %}">Visão Geral</a></li>
+    <li><a href="{% url 'interface:locate' %}">Localizar Equipamento</a></li>
+    <li><a href="{% url 'interface:look' %}">Consultar Equipamentos</a></li>
     <li><a href="{% url 'interface:manage' %}">Gerenciar</a></li>
     <li><a href="{% url 'interface:exit' %}">Sair</a></li>
 {% endblock %}
@@ -28,13 +28,13 @@
         <div class="card">
             <div class="card-content">
                 <div style="height:48px">
-                    <span style="display:inline-block;" class="card-title">Consulta de equipamentos</span>                    
+                    <span style="display:inline-block;" class="card-title">Consultar Equipamentos</span>                    
                 </div>
 				<div class="row">
-					<form action="/interface/search" method="get">
+					<form action="/interface/look" method="get">
 						<div class=" input-field col s8">
-							<label for="name">Equipamento: </label>
-							<input  placeholder="Nome" id="name" type="text" name="name" value="{{ search_results }}">
+							<label  for="name">Equipamento</label>
+							<input  placeholder="Nome" id="name" type="text" name="name">
 						</div>
 						<div class="input-field col s4">
 							<button class="red btn waves-effect waves-light" type="submit" value="submit">Buscar
@@ -56,7 +56,7 @@
 			{% for item in equipament_query_results %}
 			<tr> 
 				<td>{{ item.name }}</td>
-				<td>{{ item.device.last_position }}</td>
+				<td><b>{{ item.device.last_position }}</b></td>
 				<td>{{ item.device.last_seen }}</td>
 			</tr>
 			{% endfor %}
