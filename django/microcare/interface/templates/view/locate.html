@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}&mu;Care{% endblock %}
+
+{% block navLinks %}
+    <li><a href="{% url 'interface:index' %}">Visão Geral</a></li>
+    <li><a href="{% url 'interface:locate' %}">Localizar Equipamento</a></li>
+    <li><a href="{% url 'interface:look' %}">Consultar Equipamentos</a></li>
+    <li><a href="{% url 'interface:manage' %}">Gerenciar</a></li>
+    <li><a href="{% url 'interface:exit' %}">Sair</a></li>
+{% endblock %}
+{% block navLinksMobile %}
+    <li><a href="{% url 'interface:index' %}">Visão Geral</a></li>
+    <li><a href="{% url 'interface:locate' %}">Localizar Equipamento</a></li>
+    <li><a href="{% url 'interface:look' %}">Consultar Equipamentos</a></li>
+    <li><a href="{% url 'interface:manage' %}">Gerenciar</a></li>
+    <li><a href="{% url 'interface:exit' %}">Sair</a></li>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col s2 z-depth-0 card-panel">
+	</div>
+    <div class="col s8 z-depth-0 card-panel">
+        <div class="card">
+            <div class="card-content">
+                <div style="height:48px">
+                    <span style="display:inline-block;" class="card-title">Localizar Equipamento</span>                    
+                </div>
+                    
+				<div class="row">
+					<form action="/interface/locate" method="get">
+                        <div class="row">
+                            <div class=" input-field col s8">
+                            <label  for="localization">Onde Estou</label>
+                            <input  placeholder="Localização Atual" id="localization" type="text" name="localization" value="TRIAGEM">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class=" input-field col s8">
+                                <label  for="category">Equipamento</label>
+                                <input  placeholder="Nome" id="category" type="text" name="category">
+                            </div>
+                            <div class="input-field col s4">
+                                <button class="red btn waves-effect waves-light" type="submit" value="submit">Localizar
+                                <i class="material-icons right">location_searching</i>
+                                </button>
+                            </div>
+                        </div>
+                    </form> 
+                </div>
+				<div class="row">
+				<table>
+        <thead>
+          <tr>
+              <th>Nome</th>
+              <th>Localização</th>
+              <th>Distancia</th>
+          </tr>
+        </thead>
+        <tbody>
+			<tr> 
+				<td>{{ item.name }}</td>
+				<td><b>{{ item.device.last_position }}</b></td>
+				<td>{{ distance }} m</td>
+			</tr>
+        </tbody>
+      </table>
+	  </div>
+			</div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

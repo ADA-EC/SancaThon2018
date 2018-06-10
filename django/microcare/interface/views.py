@@ -5,31 +5,43 @@ from .models import Device, Equipament
 # Create your views here.
 
 def index(request):
-	
-
 	return render(request, "view/index.html")
     
-def view(request):
-    return render(request, "view/view.html")
+def locate(request):
+    equipament = None
+    # distance uses symbolic values just for mockup purposes
+    distance = ""
+    if request.method == 'GET':
+        if request.GET.get('localization'):
+            category = request.GET['category']
+            localization = request.GET['localization']
+            equipaments = Equipament.objects.filter(category__startswith=category).select_related('device')
+            for equip in equipaments:
+                if equip.device.last_position == localization:
+                    distance = "0"
+                    return render(request, "view/locate.html", { 'item': equip, 'distance': distance } )
+            distance = "230"
+            return render(request, "view/locate.html", { 'item': equipaments.first, 'distance': distance } )
+    return render(request, "view/locate.html", { 'item': equipament, 'distance': distance } )
 
-def search(request):
-    query_results = None
+def look(request):
     equipament_query_results = []
     if request.method == 'GET':
         if request.GET.get('name'):
             name = request.GET['name']
             equipament_query_results = Equipament.objects.filter(name__contains=name).select_related('device')
-            print(equipament_query_results)
-            # = Equipament.objects.filter(name__contains=name).values()
-            #device_query_results = []
-            #for equip in equipament_query_results:
-                #help(equip)
-            #    mac = equip.device_id
-            #    device_query_results.append(Device.objects.filter(mac_address=mac))
-            #equipament_query_results.append(device_query_results)				
-    return render(request, "view/search.html", { 'equipament_query_results': equipament_query_results } )
+    return render(request, "view/look.html", { 'equipament_query_results': equipament_query_results } )
 
 def manage(request):
+    if request.method == 'GET':
+        if request.GET.get('name'):
+            name = request.GET['name']
+            category = request.GET['category']
+            mac = request.GET['mac']
+            device = Device(mac_address=mac)
+            equipament = Equipament(name=name, category=category, device=device)
+            device.save()
+            equipament.save()
     return render(request, "view/manage.html")
 
 def exit(request):

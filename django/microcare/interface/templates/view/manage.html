@@ -28,11 +28,33 @@
         <div class="card">
             <div class="card-content">
                 <div style="height:48px">
-                    <span style="display:inline-block;" class="card-title">Visão Geral</span>                    
+                    <span style="display:inline-block;" class="card-title">Adicionar Equipamento</span>                    
                 </div>
 				<div class="row">
-                
-                </div>
+					<form action="/interface/manage" method="get">
+						<div class=" input-field col s8">
+                            <i class="material-icons prefix">info</i>
+							<label  for="name">Nome</label>
+							<input  placeholder="Nome do equipamento" id="name" type="text" name="name">
+						</div>
+						<div class=" input-field col s8">
+                            <i class="material-icons prefix">category</i>
+							<label  for="category">Categoria</label>
+							<input  placeholder="Categoria do equipamento" id="category" type="text" name="category">
+						</div>
+						<div class=" input-field col s8">
+                            <i class="material-icons prefix">wifi_tethering</i>
+							<label  for="mac">Identificador</label>
+							<input  placeholder="Endereço MAC do beacon" id="mac" type="text" name="mac">
+						</div>
+						<div class="input-field col s4">
+							<button class="red btn waves-effect waves-light" type="submit" value="submit">Adicionar
+							<i class="material-icons right">add</i>
+							</button>
+						</div>
+						</form> 
+                    </div>
+				</div>
 			</div>
         </div>
     </div>
