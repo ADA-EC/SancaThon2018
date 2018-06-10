@@ -11,21 +11,22 @@ class ScanDelegate(DefaultDelegate):
         if isNewDev:
             print ("Discovered device", dev.addr)
             print ("RSSI ", dev.rssi)
+
         elif isNewData:
             print ("Received new data from", dev.addr)
 
 while True:
     scanner = Scanner().withDelegate(ScanDelegate())
-    devices = scanner.scan(10.0)
+    devices = scanner.scan(1.2)
     for dev in devices:
         for (adtype, desc, value) in dev.getScanData():
-    #        print(str(adtype) + " - " + desc + " - " + value) 
+            print(str(adtype) + " - " + desc + " - " + value) 
             if (desc == "Short Local Name"):
                 if (value == "ADA#00011") :
                     root_topic = dev.addr + "/UTI01/RSSI" 
                     ts = time.time()
                     payload_data = (str(dev.rssi)+";"+str(ts))
                     publish.single(topic=root_topic, payload=payload_data, hostname="18.191.122.209")
-                    print("Published at " + root_topic + " payload: " + payload_data)
-    
+                    print("--------------\nPublished at " + root_topic + " payload: " + payload_data + "\n------------------------")
+   
 
