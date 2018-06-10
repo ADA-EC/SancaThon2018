@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}&mu;Care{% endblock %}
+
+{% block navLinks %}
+    <li><a href="{% url 'interface:index' %}">Início</a></li>
+    <li><a href="{% url 'interface:view' %}">Visualização Geral</a></li>
+    <li><a href="{% url 'interface:search' %}">Consultar Equipamento</a></li>
+    <li><a href="{% url 'interface:manage' %}">Gerenciar</a></li>
+    <li><a href="{% url 'interface:exit' %}">Sair</a></li>
+{% endblock %}
+{% block navLinksMobile %}
+    <li><a href="{% url 'interface:index' %}">Início</a></li>
+    <li><a href="{% url 'interface:view' %}">Visualização Geral</a></li>
+    <li><a href="{% url 'interface:search' %}">Consultar Equipamento</a></li>
+    <li><a href="{% url 'interface:manage' %}">Gerenciar</a></li>
+    <li><a href="{% url 'interface:exit' %}">Sair</a></li>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col s2 z-depth-0 card-panel">
+	</div>
+    <div class="col s8 z-depth-0 card-panel">
+        <div class="card">
+            <div class="card-content">
+                <div style="height:48px">
+                    <span style="display:inline-block;" class="card-title">Consulta de equipamentos</span>                    
+                </div>
+				<div class="row">
+					<form action="/interface/search" method="get">
+						<div class=" input-field col s8">
+							<label for="name">Equipamento: </label>
+							<input  placeholder="Nome" id="name" type="text" name="name" value="{{ search_results }}">
+						</div>
+						<div class="input-field col s4">
+							<button class="red btn waves-effect waves-light" type="submit" value="submit">Buscar
+							<i class="material-icons right">search</i>
+							</button>
+						</div>
+						</form> 
+				</div>
+				<div class="row">
+				<table>
+        <thead>
+          <tr>
+              <th>Nome</th>
+              <th>Localização</th>
+              <th>Última vez visto</th>
+          </tr>
+        </thead>
+        <tbody>
+			{% for item in equipament_query_results %}
+			<tr> 
+				<td>{{ item.name }}</td>
+				<td>{{ item.device.last_position }}</td>
+				<td>{{ item.device.last_seen }}</td>
+			</tr>
+			{% endfor %}
+        </tbody>
+      </table>
+	  </div>
+			</div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

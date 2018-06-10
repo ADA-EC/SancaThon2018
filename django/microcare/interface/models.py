@@ -3,7 +3,7 @@ import django.utils.timezone as timezone
 # Create your models here.
 
 class Device(models.Model):
-    mac_address = models.CharField(primary_key=True, max_length = 16)
+    mac_address = models.CharField(primary_key=True, max_length = 17)
     last_position = models.CharField(max_length = 128)
     last_seen = models.DateTimeField(default=timezone.now)
     power = models.IntegerField(default=100)
