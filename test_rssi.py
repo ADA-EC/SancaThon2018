@@ -23,7 +23,7 @@ while True:
             print(str(adtype) + " - " + desc + " - " + value) 
             if (desc == "Short Local Name"):
                 if (value == "ADA#00011") :
-                    root_topic = dev.addr + "/UTI01/RSSI" 
+                    root_topic = dev.addr + "/TRIAGEM/RSSI" 
                     ts = time.time()
                     payload_data = (str(dev.rssi)+";"+str(ts))
                     publish.single(topic=root_topic, payload=payload_data, hostname="18.191.122.209")
