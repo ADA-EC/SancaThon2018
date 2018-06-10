@@ -16,14 +16,16 @@ class ScanDelegate(DefaultDelegate):
             print ("Received new data from", dev.addr)
 
 while True:
+#    try:
     scanner = Scanner().withDelegate(ScanDelegate())
     devices = scanner.scan(1.2)
+#    except:
     for dev in devices:
         for (adtype, desc, value) in dev.getScanData():
             print(str(adtype) + " - " + desc + " - " + value) 
             if (desc == "Short Local Name"):
                 if (value == "ADA#00011") :
-                    root_topic = dev.addr + "/TRIAGEM/RSSI" 
+                    root_topic = dev.addr + "/UTI01/RSSI" 
                     ts = time.time()
                     payload_data = (str(dev.rssi)+";"+str(ts))
                     publish.single(topic=root_topic, payload=payload_data, hostname="18.191.122.209")

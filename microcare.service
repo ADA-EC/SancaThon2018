@@ -1,0 +1,17 @@
+[Unit]
+Description=Beacon sensor module of microcare
+After=remote-fs.target
+After=network.target
+After=syslog.target
+After=bluetooth.target
+
+[Service]
+Type=simple
+ExecStart=/home/linaro/SancaThon2018/run.sh
+RemainAfterExit=no
+Restart=on-failure
+RestartSec=5s
+
+
+[Install]
+WantedBy=multi-user.target
