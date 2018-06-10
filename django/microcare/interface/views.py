@@ -33,6 +33,15 @@ def look(request):
     return render(request, "view/look.html", { 'equipament_query_results': equipament_query_results } )
 
 def manage(request):
+    if request.method == 'GET':
+        if request.GET.get('name'):
+            name = request.GET['name']
+            category = request.GET['category']
+            mac = request.GET['mac']
+            device = Device(mac_address=mac)
+            equipament = Equipament(name=name, category=category, device=device)
+            device.save()
+            equipament.save()
     return render(request, "view/manage.html")
 
 def exit(request):
