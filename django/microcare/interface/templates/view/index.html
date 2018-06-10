@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}&mu;Care{% endblock %}
+
+{% block navLinks %}
+    <li><a href="{% url 'interface:index' %}">Início</a></li>
+    <li><a href="{% url 'interface:view' %}">Visualização Geral</a></li>
+    <li><a href="{% url 'interface:search' %}">Consultar Objeto</a></li>
+    <li><a href="{% url 'interface:manage' %}">Gerenciar</a></li>
+    <li><a href="{% url 'interface:exit' %}">Sair</a></li>
+{% endblock %}
+{% block navLinksMobile %}
+    <li><a href="{% url 'interface:index' %}">Início</a></li>
+    <li><a href="{% url 'interface:view' %}">Registros</a></li>
+    <li><a href="{% url 'interface:search' %}">Manual</a></li>
+    <li><a href="{% url 'interface:manage' %}">Dados TÃ©cnicos</a></li>
+    <li><a href="{% url 'interface:exit' %}">Sair</a></li>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col s8 z-depth-1 card-panel">
+        <div class="card">
+            <div class="card-content">
+                <div style="height:48px">
+                    <span style="display:inline-block;" class="card-title">Sistema de Microlocalização</span>                    
+                </div>
+			</div>
+        </div>
+    </div>
+
+    <div class="col s3 z-depth-1 card-panel">
+        <div class="card">
+            <div class="card-content" style="height:100%; width:100%; overflow: hidden;">
+                <div style="float: left; width:75%;">
+                    <div>
+                        <img style="vertical-align:middle" src="{% static '/view/images/sunrise.png' %}" alt="Nascer do sol" width="25%" height="25%">
+                        <span style="vertical-align:middle; margin-left:5%; font-size:1.8vw">{{ sunrise }}</span>
+                    </div>
+                    <div style="margin-top:5%">
+                        <img style="vertical-align:middle" src="{% static '/view/images/sunset.png' %}" alt="PÃ´r do sol" width="25%" height="25%">
+                        <span style="vertical-align:middle; margin-left:5%; font-size:1.8vw">{{ sunset }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+{% endblock %}
